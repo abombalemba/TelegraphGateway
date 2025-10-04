@@ -11,7 +11,7 @@ class MongoDB:
 	def connect(self) -> None:
 		try:
 			self.client = pymongo.MongoClient(self.connection)
-			self.database = self.client.telegraph_gateway
+			self.database = self.client['telegraph_gateway']
 
 		except Exception as ex:
 			print(ex)
@@ -20,6 +20,10 @@ class MongoDB:
 		try:
 			if self.client:
 				self.client.close()
+
+				self.client = None
+				self.database = None
+
 		except Exception as ex:
 			print(ex)
 
